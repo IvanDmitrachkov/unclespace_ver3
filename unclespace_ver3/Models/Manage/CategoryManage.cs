@@ -4,12 +4,13 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace unclespace_ver3.Models.Manage
+namespace unclespace_ver3.Models
 {
     public class CategoryManage
     {
         public bool Add(Category category, List<HttpPostedFileBase> images)
         {
+            category.ImagePath = "/Category/" + category.Name;
             if (ImageManage.Add(category.ImagePath , images))
             {
                 using (ApplicationDbContext db = new ApplicationDbContext())

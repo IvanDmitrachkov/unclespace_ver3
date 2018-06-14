@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 
-namespace unclespace_ver3.Models.Manage
+namespace unclespace_ver3.Models
 {
     public static class ImageManage
     {
@@ -24,7 +24,7 @@ namespace unclespace_ver3.Models.Manage
                     {
                         string _n = file.FileName.Substring(file.FileName.Length - 4);
                         string name = n.ToString() + _n;
-                        file.SaveAs(HttpContext.Current.Server.MapPath("~/Images" + path + name));
+                        file.SaveAs(HttpContext.Current.Server.MapPath("~/Images" + path + "/" + name));
                         n++;
                     }
                 }

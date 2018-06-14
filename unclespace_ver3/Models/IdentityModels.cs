@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -23,20 +24,33 @@ namespace unclespace_ver3.Models
     public class Product
     {
         public int Id { get; set; }
+
+        [Display(Name ="Название")]
         public string Name { get; set; }
+
+        [Display(Name = "Заглавие")]
         public string Title { get; set; }
+
+        [Display(Name = "Описание")]
         public string Description { get; set; }
         public string ImagePath { get; set; }
+
+        [Display(Name = "Особенности")]
         public string Features { get; set; }
+
+        [Display(Name = "Цена")]
         public int Price { get; set; }
 
-        public int? CatId { get; set; }
+
+        public int? CategoryId { get; set; }
         public Category Category { get; set; }
     }
 
     public class Category
     {
         public int Id { get; set; }
+
+        [Display(Name = "Название")]
         public string Name { get; set; }
         public string ImagePath { get; set; }
         public ICollection<Product> Products { get; set; }

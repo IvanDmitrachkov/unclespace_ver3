@@ -4,12 +4,13 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace unclespace_ver3.Models.Manage
+namespace unclespace_ver3.Models
 {
     public class ProductManage
     {
         public bool Add(Product product, List<HttpPostedFileBase> images)
         {
+            product.ImagePath = "/Product/" + product.Category + "/" + product.Name;
             if (ImageManage.Add(product.ImagePath, images))
             {
                 using (ApplicationDbContext db = new ApplicationDbContext())
@@ -22,11 +23,11 @@ namespace unclespace_ver3.Models.Manage
             return false;
         }
 
-        public async void Delete(int Id)
+        public void Delete(int Id)
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                Product product = await db.Products.FindAsync(Id);
+                Product product = db.Products.Find(Id);
                 if (product != null)
                 {
                     db.Products.Remove(product);

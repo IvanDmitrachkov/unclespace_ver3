@@ -1,0 +1,66 @@
+﻿@model unclespace_ver3.Models.Product
+
+
+
+<h2>Добавление товара</h2>
+
+<hr />
+
+@using (Ajax.BeginForm("AddProduct", "Admin", null, new AjaxOptions { UpdateTargetId = "add" }, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name, new { @class = "col-md-3 control-label" })
+        <div class="col-md-9">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Title, new { @class = "col-md-3 control-label" })
+        <div class="col-md-9">
+            @Html.TextBoxFor(m=>m.Title, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Category, new { @class = "col-md-3 control-label" })
+        <div class="col-md-9">
+            @Html.DropDownListFor(m => m.Category_Id , ViewBag.Cat as SelectList)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description, new { @class = "col-md-3 control-label" })
+        <div class="col-md-9">
+            @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Features, new { @class = "col-md-3 control-label" })
+        <div class="col-md-9">
+            @Html.TextBoxFor(m => m.Features, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Price, new { @class = "col-md-3 control-label" })
+        <div class="col-md-9">
+            @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+        </div>
+    </div>
+
+
+    <input class="form-control-file" style="margin-top: 20px" type="file" name="images">
+    <input class="form-control-file" style="margin-top: 20px" type="file" name="images">
+    <input class="form-control-file" style="margin-top: 20px" type="file" name="images">
+
+    <input type="submit" value="Добавить" style="float: right; margin-bottom: 60px" class="btn btn-primary" />
+    <br />
+    <br />
+}
+
+
+
+
