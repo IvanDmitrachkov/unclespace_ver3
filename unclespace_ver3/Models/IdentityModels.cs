@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -18,8 +19,38 @@ namespace unclespace_ver3.Models
         }
     }
 
+
+    public class Product
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string ImagePath { get; set; }
+        public string Features { get; set; }
+        public int Price { get; set; }
+
+        public int? CatId { get; set; }
+        public Category Category { get; set; }
+    }
+
+    public class Category
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string ImagePath { get; set; }
+        public ICollection<Product> Products { get; set; }
+        public Category()
+        {
+            Products = new List<Product>();
+        }
+    }
+
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
