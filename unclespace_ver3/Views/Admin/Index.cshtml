@@ -45,7 +45,7 @@
                 <th>@product.Id</th>
                 <th>@product.Name</th>
                 <th>@product.Title</th>
-                <th>@product.Category </th>
+                <th>@product.Category.Name</th>
                 <th>@Html.ActionLink("Удалить", "DeleteProduct", "Admin", new { Id = product.Id}, new { @class="btn btn-primary"})</th>
                 <th><input type="button" href="../Admin/DeleteProduct/@product.Id" class="btn btn-primary" value="Удалить" /> </th>
             </tr>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
 using unclespace_ver3.Models;
@@ -14,7 +15,7 @@ namespace unclespace_ver3.Controllers
         {
             ViewBag.action = action;
             ApplicationDbContext db = new ApplicationDbContext();
-            var products = db.Products.Include(m =>m.) ;
+            var products = db.Products.Include(p=> p.Category).ToList();
 
             SelectList Cat = new SelectList(db.Categories, "Id", "Name");
             ViewBag.Cat = Cat;
