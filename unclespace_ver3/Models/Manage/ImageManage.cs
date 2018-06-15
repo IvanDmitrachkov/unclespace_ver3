@@ -12,11 +12,11 @@ namespace unclespace_ver3.Models
         {
             try
             {
-                if (Directory.Exists(HttpContext.Current.Server.MapPath("~/Images" + path)))
+                if (Directory.Exists(HttpContext.Current.Server.MapPath("~" + path)))
                 {
-                    Directory.Delete(HttpContext.Current.Server.MapPath("~/Images" + path), true);
+                    Directory.Delete(HttpContext.Current.Server.MapPath("~" + path), true);
                 }
-                Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Images" + path));
+                Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~" + path));
                 int n = 1;
                 foreach (var file in images)
                 {
@@ -24,7 +24,7 @@ namespace unclespace_ver3.Models
                     {
                         string _n = file.FileName.Substring(file.FileName.Length - 4);
                         string name = n.ToString() + _n;
-                        file.SaveAs(HttpContext.Current.Server.MapPath("~/Images" + path + "/" + name));
+                        file.SaveAs(HttpContext.Current.Server.MapPath("~" + path + name));
                         n++;
                     }
                 }
@@ -40,9 +40,9 @@ namespace unclespace_ver3.Models
         {
             try
             {
-                if (Directory.Exists(HttpContext.Current.Server.MapPath("~/Images" + path)))
+                if (Directory.Exists(HttpContext.Current.Server.MapPath("~" + path)))
                 {
-                    Directory.Delete(HttpContext.Current.Server.MapPath("~/Images" + path), true);
+                    Directory.Delete(HttpContext.Current.Server.MapPath("~" + path), true);
                 }
                 return true;
             }

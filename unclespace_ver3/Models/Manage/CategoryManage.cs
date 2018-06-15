@@ -10,24 +10,37 @@ namespace unclespace_ver3.Models
     {
         public bool Add(Category category, List<HttpPostedFileBase> images)
         {
-            category.ImagePath = "/Category/" + category.Name;
-            if (ImageManage.Add(category.ImagePath , images))
+            using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                using (ApplicationDbContext db = new ApplicationDbContext())
+                if (db.Categories.FirstOrDefault(m => m.Name == category.Name) != null)
+                {
+                    return false;
+                }
+
+                category.ImagePath = "/Images/Category/" + category.Name +"/";
+
+                if (ImageManage.Add(category.ImagePath, images))
                 {
                     db.Categories.Add(category);
                     db.SaveChanges();
+                    return true;
                 }
-                return true;
+                return false;
             }
-            return false;
         }
 
-        public async void Delete(int Id)
+        public void Delete(int Id)
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                Category category = await db.Categories.FindAsync(Id);
+                Category category = db.Categories.Find(Id);
+                List<Product> list = db.Products.Where(m => m.CategoryId == Id).ToList();
+
+                foreach (var a in list)
+                {
+                    ImageManage.Delete(a.ImagePath);
+                }
+
                 if (category != null)
                 {
                     db.Categories.Remove(category);

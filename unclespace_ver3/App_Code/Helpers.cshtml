@@ -1,0 +1,89 @@
+﻿
+@helper HtmlList(unclespace_ver3.Models.ProductVsImage p)
+    {
+        // Сам контейнер
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6" style="height: 450px ">
+
+                    <div id=@p.product.Id class="carousel slide" data-ride="carousel">
+                        <!-- Указатели -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                        </ol>
+                        <!-- Контент слайда (slider wrap)-->
+                        <div class="carousel-inner list">
+                            <div class="item active">
+                                <img src=@p.images[0] alt="...">
+                                <div class="carousel-caption">
+
+                                </div>
+                            </div>
+                            @if (p.images.Count > 1)
+                            {
+                                <div class="item">
+                                    <img src=@p.images[1]  alt="...">
+                                    <div class="carousel-caption">
+                                    </div>
+                                </div>
+                            }
+                            @if (p.images.Count > 2)
+                            { 
+                                <div class="item">
+                                    <img src=@p.images[2]  alt="..." />
+                                    <div class="carousel-caption">
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                        <!-- Элементы управления -->
+                        <a class="left carousel-control" href="#@p.product.Id" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                        <a class="right carousel-control" href="#@p.product.Id" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </a>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    @p.images[0]
+
+                    <h1>@p.product.Name</h1>
+
+                    <h3>@p.product.Title</h3>
+                    <hr />
+                    <p>@p.product.Description</p>
+                    <hr />
+                    <h3>Цена сайта @p.product.Price руб.</h3>
+
+                    <button type="button" class="btn btn-primary btn-lg open-purchase" data-id=@p.product.Id data-name=@p.product.Name>
+                        Заказать
+                    </button>
+
+                </div>
+            </div>
+        </div>
+        <br />
+        <hr />
+
+
+
+
+
+        <style type="text/css">
+            .list {
+                display: block;
+                background-color: red;
+                width: 100%;
+                height: 400px;
+                background-color: slategrey;
+            }
+        </style>
+}
+
+

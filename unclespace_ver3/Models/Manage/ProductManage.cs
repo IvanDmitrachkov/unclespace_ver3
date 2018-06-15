@@ -10,17 +10,23 @@ namespace unclespace_ver3.Models
     {
         public bool Add(Product product, List<HttpPostedFileBase> images)
         {
-            product.ImagePath = "/Product/" + product.Category + "/" + product.Name;
-            if (ImageManage.Add(product.ImagePath, images))
+            using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                using (ApplicationDbContext db = new ApplicationDbContext())
+                if (db.Products.FirstOrDefault(m => m.Name == product.Name)!= null)
+                {
+                    return false;
+                }
+
+                product.ImagePath = "/Images/Product/" + product.CategoryId + "/" + product.Name.Replace(" ","_") + "/";
+                if (ImageManage.Add(product.ImagePath, images))
                 {
                     db.Products.Add(product);
                     db.SaveChanges();
+
+                    return true;
                 }
-                return true;
+                return false;
             }
-            return false;
         }
 
         public void Delete(int Id)

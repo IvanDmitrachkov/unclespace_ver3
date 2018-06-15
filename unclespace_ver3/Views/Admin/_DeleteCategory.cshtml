@@ -1,0 +1,19 @@
+﻿@model unclespace_ver3.Models.Category
+
+
+<table>
+    <thead>
+        <tr>
+            <td>Категория</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (unclespace_ver3.Models.Category cat in ViewBag.list)
+        {
+            <tr>
+                <td>@cat.Name</td>
+                <td>@Html.ActionLink("Удалить", "DeleteCategory", new { Id = cat.Id }, new { @class="btn btn-primary" , @id= "delete" })</td>
+            </tr>
+        }
+    </tbody>
+</table>

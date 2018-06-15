@@ -21,11 +21,27 @@
     </div>
 </div>
 
+<!-- Удалить категорию -->
+<div id="aa" class="modal fade delete-cat" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="padding: 30px 30px 30px 30px">
+            @Html.Partial("_DeleteCategory", new unclespace_ver3.Models.Category())
+        </div>
+    </div>
+</div>
 
-@ViewBag.action 
+<!-- Предупреждение -->
+<div id="deleteModal" class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="padding: 30px 30px 30px 30px">
+            <h2>Вы действительно собираетесь удалить?</h2>
+            <hr />
+            <a id="delete-confirm" class="btn btn-primary">Удалить</a>
+        </div>
+    </div>
+</div>
+
 <h2>Панель администратора</h2>
-
-<div id="add"></div>
 
 <h3>Список пользователей</h3>
 
@@ -46,13 +62,33 @@
                 <th>@product.Name</th>
                 <th>@product.Title</th>
                 <th>@product.Category.Name</th>
-                <th>@Html.ActionLink("Удалить", "DeleteProduct", "Admin", new { Id = product.Id}, new { @class="btn btn-primary"})</th>
-                <th><input type="button" href="../Admin/DeleteProduct/@product.Id" class="btn btn-primary" value="Удалить" /> </th>
+                
+                <th><a class="openModal btn btn-primary" id=@product.Id>Удалить</a></th>
             </tr>
         </tbody>
     }
 </table>
 
+<div id="add"></div>
 
 <button class="btn btn-primary" data-toggle="modal" data-target=".bd-addProduct">Добавить Товар</button>
 <button class="btn btn-primary" data-toggle="modal" data-target=".bd-addCategory">Добавить Категорию</button>
+<button class="btn btn-primary" data-toggle="modal" data-target=".delete-cat">Категории</button>
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".openModal").click(function () {
+                var id = $(this).attr('id');
+                var addr = "../Admin/DeleteProduct/" + id;
+                jQuery.noConflict();
+                
+                $("#deleteModal").modal("show");
+                $('#delete-confirm').attr('href', addr);
+            })
+        })
+    </script>
+
+}
